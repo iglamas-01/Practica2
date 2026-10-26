@@ -270,3 +270,75 @@ if(!file.exists("results")){
 
 ggsave(nineamv4, file='./results/Ejercicio2.pdf')
 ```
+
+## Ejercicio 3
+
+### Apartado 1
+
+Cargamos el fichero iris_tidy.RData.
+
+```{r}
+load("./data/iris_tidy.RData")
+```
+
+### Apartado 2
+
+Realizamos un primer estudio muy breve de los datos con la función str().
+
+```{r}
+str(iris.tidy)
+```
+
+Este dataset contiene 4 variables: Species (factor de tres niveles), Part (factor de dos niveles), Measure (vector de characters) y Value (vector numérico).
+Podemos entender entonces que se trata de la medida de las partes de algunas especies de lirios.
+
+### Apartado 3
+
+```{r}
+iris.grafico1<-ggplot(iris.tidy, aes(x=Species, y=Value))
+```
+
+### Apartado 4
+
+```{r}
+iris.grafico1 + geom_point()
+```
+
+```{r}
+iris.grafico2<-iris.grafico1 + geom_point() + aes(colour=Part)
+iris.grafico2
+```
+
+### Apartado 5
+
+```{r}
+iris.grafico2v2<-iris.grafico2 + facet_grid(Measure~.)
+iris.grafico2v2
+```
+
+```{r}
+iris.grafico2v3<-iris.grafico2 + facet_grid(.~Measure)
+iris.grafico2v3
+```
+
+En este caso, la disposición en columnas es mucho más informativa porque nos permite comparar directamente la longitud y la anchura del pétalo y del sépalo gracias a que comparten el mismo eje y.
+
+### Apartado 6
+
+```{r}
+iris.grafico2v4<-ggplot(iris.tidy, aes(x=Species, y=Value, colour=Part)) + geom_jitter() + facet_grid(.~Measure)
+iris.grafico2v4
+```
+
+Al usar geom_jitter() vemos como se ha añadido un pequeño ruido a las medidas para que no todas tuvieran el mismo valor.
+Sin embargo, esto no tiene sentido cuando en el eje x tenemos una variable categórica, como es el caso.
+
+### Apartado 7
+
+```{r}
+if(!file.exists("results")){
+  dir.create("results")
+}
+
+ggsave(file='./results/Ejercicio3.pdf')
+```
