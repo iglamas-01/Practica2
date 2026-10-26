@@ -214,3 +214,59 @@ if(!file.exists("results")){
 
 ggsave(grafico3, file='./results/Ejercicio1.pdf')
 ```
+
+## Ejercicio 2
+
+### Apartado 1
+
+Continuamos empleando el mismo dataset que en el ejercicio anterior, pero ahora con nuevas variables.
+
+```{r}
+nineam<-ggplot(ds, aes(x = Temp9am, y = Pressure9am)) + geom_point()
+nineam
+```
+
+En los apartados siguientes representaremos la información de una variable categórica (RainToday) de distintas formas para compararlas y determinar cual es la mejor.
+
+### Apartado 2
+
+```{r}
+nineamv2<- nineam + aes(shape=RainToday)
+nineamv2
+```
+
+### Apartado 3
+
+```{r}
+nineamv3<-nineam + aes(colour=RainToday)
+nineamv3
+```
+
+Como podemos comprobar, debido a la distribución de los datos, con una gran concrentración de puntos en el centro, la información que nos proporciona la variable RainToday se observa mejor con el color del punto.
+
+### Apartado 4
+
+Arreglamos nuestra figura añadiendo título, subtítulo, etc.
+
+```{r}
+nineamv4<-nineamv3 + 
+  labs(
+    title = "Temperatura y presión a las 9 AM",
+    subtitle = "Relación entre la temperatura y la presión a las 9 AM",
+    x = "Temperatura (ºC)",
+    y = "Presión (hPa)",
+    colour='Lluvia')
+nineamv4
+```
+
+### Apartado 5
+
+Finalmente, guardamos también esta figura en pdf.
+
+```{r}
+if(!file.exists("results")){
+  dir.create("results")
+}
+
+ggsave(nineamv4, file='./results/Ejercicio2.pdf')
+```
