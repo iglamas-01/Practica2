@@ -395,3 +395,49 @@ if(!file.exists("results")){
 
 ggsave(file='./results/Ejercicio4.pdf')
 ```
+
+## Ejercicio 5
+
+### Apartado 1
+
+```{r}
+load("./data/Experimento.RData")
+str(Experimento)
+```
+
+El dataset de este ejercicio cuenta con 4 variables: Complemento (factor de dos niveles), dosis, altura y error de la altura (vectores numéricos).
+Son los datos de un experimento.
+
+### Apartado 2
+
+```{r}
+experimentografico<- ggplot(Experimento, aes(x=Dosis, y = Altura, linetype = Complemento, shape=Complemento)) + geom_line() + geom_point()
+experimentografico
+```
+
+### Apartado 3
+
+```{r}
+experimentograficoerrores<- ggplot(Experimento, aes(x=Dosis, y = Altura, linetype = Complemento, shape=Complemento)) + geom_line() + geom_point() + geom_errorbar(aes(ymin=Altura-Error_Altura, ymax=Altura+Error_Altura), width=0.1, position=position_dodge(0.05))
+experimentograficoerrores
+```
+
+### Apartado 4
+
+```{r}
+experimentograficoerroresv1 <- ggplot(Experimento, aes(x = Dosis, y = Altura, colour = Complemento)) + geom_line(aes(linetype = Complemento)) + geom_point(aes(shape = Complemento)) + geom_errorbar(aes(ymin = Altura - Error_Altura, ymax = Altura + Error_Altura), width = 0.1, position = position_dodge(0.05)) + scale_color_brewer(palette = "Reds")
+
+experimentograficoerroresv1
+```
+
+### Apartado 5
+
+```{r}
+if(!file.exists("results")){
+  dir.create("results")
+}
+
+ggsave(file='./results/Ejercicio5.pdf')
+```
+
+## 
