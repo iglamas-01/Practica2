@@ -153,3 +153,64 @@ pacman::p_load(
 ```
 
 # Práctica 2. Visualización de Datos.
+
+## Ejercicio 1
+
+### Apartado 1
+
+Lo primero que tenemos que hacer en este ejercicio es cargar el fichero weatherAUS.RData.
+
+```{r}
+load("./data/weatherAUS.RData")
+
+```
+
+### Apartado 2
+
+Vamos a crear nuestra figura.
+Para empezar construiremos un objeto ggplot utilizando los datos que hemos cargado en el que en el eje x se representará la variable `MinTemp` del conjunto y en el eje y la variable `MaxTemp`.
+
+```{r}
+library(ggplot2)
+grafico1<-ggplot(ds, aes(x = MinTemp, y = MaxTemp))
+```
+
+### Apartado 3
+
+Queremos mostrar un gráfico de dispersión para estas dos variables.
+Utilizamos geom_point().
+
+```{r}
+grafico1 + geom_point()
+```
+
+### Apartado 4
+
+En un gráfico de este tipo podemos además añadir la información de una variable categórica con una escala de colores, por ejemplo.
+Vamos a hacer esto para la variable RainTomorrow.
+
+```{r}
+grafico2<-ggplot(ds, aes(x = MinTemp, y = MaxTemp, colour = RainTomorrow)) + geom_point()
+grafico2
+```
+
+### Apartado 5
+
+También podemos añadir un título a nuestro gráfico.
+
+```{r}
+grafico3<-grafico2 + ggtitle("Gráfico de dispersión temperatura máxima (MaxTemp) frente a temperatura mínima (MinTemp)")
+grafico3
+```
+
+### Apartado 6
+
+Finalmente, guardamos nuestra figura como un pdf.
+
+```{r}
+if(!file.exists("results")){
+  dir.create("results")
+}
+
+ggsave(grafico3, file='./results/Ejercicio1.pdf')
+```
