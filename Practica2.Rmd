@@ -523,3 +523,30 @@ if(!file.exists("results")){
 
 ggsave(file='./results/Ejercicio7.pdf')
 ```
+
+## Ejercicio 8
+
+### Apartado 1
+
+```{r}
+chol <- read.table("http://assets.datacamp.com/blog_assets/chol.txt", header = TRUE)
+head(chol)
+```
+
+### Apartado 2
+
+```{r}
+cholhist <- ggplot(chol, aes(x = HEIGHT)) + geom_histogram()
+cholhist
+```
+
+### Apartado 3
+
+```{r}
+cholhistv2<- cholhist+labs(title = "Histograma de la variable Altura",
+     x = "Altura (cm)",
+     y = "Frecuencia")
+cholhistv2
+```
+
+### Apartado 4
