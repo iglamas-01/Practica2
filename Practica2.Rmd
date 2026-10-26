@@ -468,3 +468,58 @@ if(!file.exists("results")){
 
 ggsave(file='./results/Ejercicio6.pdf')
 ```
+
+## Ejercicio 7
+
+### Apartado 1
+
+```{r}
+load("./data/weatherAUS_distributions.RData")
+```
+
+### Apartado 2
+
+```{r}
+bxpltmin<-ggplot(ds, aes(x=Year, y=MinTemp)) + geom_boxplot()
+bxpltmin
+```
+
+### Apartado 3
+
+```{r}
+bxpltmax<-ggplot(ds, aes(x=Year, y=MaxTemp, colour = Year)) + geom_boxplot() +
+  labs(
+    title = "Distribución de temperaturas máximas por año",
+    x = "Año",
+    y = "Temperatura (ºC)",
+    colour='Año')
+bxpltmax
+```
+
+### Apartado 4
+
+```{r}
+bxpltmax <- ggplot(ds, aes(x = Year, y = MaxTemp, colour = Year)) +
+  geom_boxplot() +
+  labs(
+    title = "Distribución de temperaturas máximas por año",
+    x = "Año",
+    y = "Temperatura (ºC)",
+    colour = "Año") +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+bxpltmax
+```
+
+### Apartado 5
+
+```{r}
+if(!file.exists("results")){
+  dir.create("results")
+}
+
+ggsave(file='./results/Ejercicio7.pdf')
+```
