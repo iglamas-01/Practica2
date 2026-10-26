@@ -440,4 +440,31 @@ if(!file.exists("results")){
 ggsave(file='./results/Ejercicio5.pdf')
 ```
 
-## 
+## Ejercicio 6
+
+### Apartados 1 y 2
+
+```{r}
+load("./data/iceRiver.RData")
+```
+
+```{r}
+icerivgraf<-ggplot(ice.river.df) + geom_line(aes(x=time, y=flow.vat, color="red")) + geom_line(aes(x=time, y=flow.jok, color="blue")) +
+  labs(
+    title = "Caudal de dos ríos de Islandia",
+    subtitle = "Comparación de los caudales de dos ríos islandeses a lo largo de un período de tiempo",
+    x = "Tiempo",
+    y = "Caudal",
+    color='Río')
+icerivgraf
+```
+
+### Apartado 3
+
+```{r}
+if(!file.exists("results")){
+  dir.create("results")
+}
+
+ggsave(file='./results/Ejercicio6.pdf')
+```
