@@ -342,3 +342,56 @@ if(!file.exists("results")){
 
 ggsave(file='./results/Ejercicio3.pdf')
 ```
+
+## Ejercicio 4
+
+### Apartado 1
+
+```{r}
+load("./data/Ejercicio4_Data.RData")
+str(DatosEjer4)
+```
+
+En este caso encontramos un DataFrame con tres variables: Fecha, Fabricante (factor de dos niveles) y Ventas (vector numérico)
+
+### Apartado 2
+
+```{r}
+Ejer4grafico<- ggplot(DatosEjer4, aes(x=Fecha, y = Ventas, colour = Fabricante)) + geom_point()
+Ejer4grafico
+```
+
+Este gráfico puede ser confuso para evalura la evolución de las ventas por la gran cantidad de puntos con los que contamos.
+
+### Apartado 3
+
+```{r}
+Ejer4graficov2<- ggplot(DatosEjer4, aes(x=Fecha, y = Ventas, colour = Fabricante)) + geom_line()
+Ejer4graficov2
+```
+
+### Apartado 3
+
+```{r}
+Ejer4graficov3<- ggplot(DatosEjer4, aes(x=Fecha, y = Ventas)) + geom_line(aes(linetype=Fabricante, colour = Fabricante))
+Ejer4graficov3
+```
+
+### Apartado 4
+
+```{r}
+Ejer4graficov4<-Ejer4graficov3+ggtitle("Ventas mensuales de diferentes compañías tecnológicas")
+Ejer4graficov4
+```
+
+Hemos arreglado el gráfico para que muestre de forma más clara las tendencias gracias a la representación con líneas.
+
+### Apartado 5
+
+```{r}
+if(!file.exists("results")){
+  dir.create("results")
+}
+
+ggsave(file='./results/Ejercicio4.pdf')
+```
